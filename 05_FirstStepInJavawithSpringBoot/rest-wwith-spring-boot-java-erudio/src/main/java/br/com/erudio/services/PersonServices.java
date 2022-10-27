@@ -53,6 +53,7 @@ public class PersonServices {
 		entity.setFirstName(person.getFirstName());
 		entity.setLastName(person.getLastName());
 		entity.setAndress(person.getAndress());
+		entity.setPassword(person.getPassword());
 		entity.setGender(person.getGender());
 
 		var vo = DozerMapper.parseObject(repository.save(entity), PersonVO.class);

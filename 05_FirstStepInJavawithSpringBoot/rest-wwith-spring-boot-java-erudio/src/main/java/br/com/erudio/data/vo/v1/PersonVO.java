@@ -11,12 +11,24 @@ public class PersonVO implements Serializable{
 	private long id;
 	private String firstName;
 	private String lastName;
+	private String password;
 	private String andress;
 	private String gender;
 	
 	public PersonVO() {
 	
 	}
+
+	
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 
 	public long getId() {
 		return id;

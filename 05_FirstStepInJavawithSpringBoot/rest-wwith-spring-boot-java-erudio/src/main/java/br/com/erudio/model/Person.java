@@ -26,6 +26,17 @@ public class Person implements Serializable{
 	@Column(name = "last_name", nullable = false, length = 80)
 	private String lastName;
 	
+	@Column(name = "password", nullable = false, length = 80)
+	private String password;
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@Column(nullable = false, length = 100)
 	private String andress;
 	
