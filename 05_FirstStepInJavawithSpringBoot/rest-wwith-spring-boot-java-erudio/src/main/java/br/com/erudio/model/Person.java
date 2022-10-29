@@ -3,8 +3,12 @@ package br.com.erudio.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,12 +20,21 @@ public class Person implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
+	public static enum PersonType{
+		ALUNO,
+		PROFESSOR;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(unique = true,name = "email",nullable = false, length = 80)
-    String email;
+	@Column(name="person_type",nullable = false)
+	@Enumerated(EnumType.STRING)
+	private PersonType personType;
+		
+	@Column(unique = true, name = "email",nullable = false, length = 80)
+    private String email;
 	
 	@Column(name = "first_name", nullable = false, length = 80)
 	private String firstName;
@@ -29,8 +42,22 @@ public class Person implements Serializable{
 	@Column(name = "last_name", nullable = false, length = 80)
 	private String lastName;
 	
+	@Column(name = "security_question", nullable = false, length = 80)
+	private String securityQuestion;
+	
+	@Column(name = "security_response", nullable = false, length = 80)
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	private String securityResponse;
+	
 	@Column(name = "password", nullable = false, length = 80)
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
+	
+	@Column(nullable = false, length = 100)
+	private String andress;
+	
+	@Column(nullable = false, length = 6)
+	private String gender;
 	
 	public String getPassword() {
 		return password;
@@ -39,22 +66,41 @@ public class Person implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	@Column(nullable = false, length = 100)
-	private String andress;
-	
-	@Column(nullable = false, length = 6)
-	private String gender;
 	
 	public Person() {
 	
 	}
 
+	
+	
 	public long getId() {
 		return id;
 	}
+		
+	public PersonType getPersonType() {
+		return personType;
+	}
 
-	
+	public void setPersonType(PersonType personType) {
+		this.personType = personType;
+	}
+
+	public String getSecurityQuestion() {
+		return securityQuestion;
+	}
+
+	public void setSecurityQuestion(String securityQuestion) {
+		this.securityQuestion = securityQuestion;
+	}
+
+	public String getSecurityResponse() {
+		return securityResponse;
+	}
+
+	public void setSecurityResponse(String securityResponse) {
+		this.securityResponse = securityResponse;
+	}
+
 	public String getEmail() {
 		return email;
 	}
