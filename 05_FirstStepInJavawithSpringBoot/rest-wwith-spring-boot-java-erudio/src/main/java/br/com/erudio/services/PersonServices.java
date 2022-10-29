@@ -34,6 +34,14 @@ public class PersonServices {
 				.orElseThrow(() -> new ResouceNotFoundException("No records found for this ID!"));
 		return DozerMapper.parseObject(entity, PersonVO.class);
 	}
+	public PersonVO findByEmail(String email) {
+
+		logger.info("Finding one person!");
+		
+		var entity = repository.findByEmail(email);
+//				.orElseThrow(() -> new ResouceNotFoundException("No records found for this ID!"));
+		return DozerMapper.parseObject(entity, PersonVO.class);
+	}
 
 	public PersonVO created(PersonVO person) {
 
@@ -52,6 +60,7 @@ public class PersonServices {
 
 		entity.setFirstName(person.getFirstName());
 		entity.setLastName(person.getLastName());
+		entity.setEmail(person.getEmail());
 		entity.setAndress(person.getAndress());
 		entity.setPassword(person.getPassword());
 		entity.setGender(person.getGender());

@@ -1,6 +1,7 @@
 package br.com.erudio.controller;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -21,6 +22,9 @@ import br.com.erudio.services.PersonServices;
 @RequestMapping("/person")
 public class PersonController {
 	
+	private Logger logger = Logger.getLogger(PersonServices.class.getName());
+	String a;
+	
 	@Autowired
 	private PersonServices service;
 	
@@ -34,10 +38,16 @@ public class PersonController {
 	public PersonVO findById(@PathVariable(value = "id") Long id) {
 		return service.findById(id);
 	}
+	@GetMapping(value = "email/{email}",
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public PersonVO findByEmail(@PathVariable(value = "email") String email) {
+		return service.findByEmail(email);
+	}
 	
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public PersonVO create(@RequestBody PersonVO person) {
+		
 		return service.created(person);
 	}
 	

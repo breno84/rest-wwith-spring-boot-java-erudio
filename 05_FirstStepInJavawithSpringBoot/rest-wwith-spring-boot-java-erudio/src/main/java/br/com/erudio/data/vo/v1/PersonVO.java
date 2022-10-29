@@ -9,6 +9,7 @@ public class PersonVO implements Serializable{
 
 
 	private long id;
+	private String email;
 	private String firstName;
 	private String lastName;
 	private String password;
@@ -20,6 +21,16 @@ public class PersonVO implements Serializable{
 	}
 
 	
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
 	public String getPassword() {
 		return password;
 	}
